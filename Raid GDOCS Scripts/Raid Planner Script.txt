@@ -1,0 +1,84 @@
+function myFunction() {
+  var gr1 = "";
+  var gr2 = "";
+  var gr3 = "";
+  var gr4 = "";
+  var gr1wa = "";
+  var gr2wa = "";
+  var gr3wa = "";
+  var gr4wa = "";
+  var gr1aa = "";
+  var gr2aa = "";
+  var gr3aa = "";
+  var gr4aa = "";
+  
+  
+ var ss = SpreadsheetApp.getActiveSpreadsheet(),
+     sheet = ss.getActiveSheet(),
+     range = sheet.getDataRange(),
+     values = range.getValues();
+  for (var r=0; r<5; r++) {
+   var row = values[r],
+       namegr1 = row[0]+'", ',
+       namegr2 = row[1]+'", ',
+       namegr3 = row[2]+'", ',
+       namegr4 = row[3]+'", ',
+       gr1=gr1 + '"' + namegr1;
+       gr2=gr2 + '"' + namegr2;
+       gr3=gr3 + '"' + namegr3;
+       gr4=gr4 + '"' + namegr4;
+  }  
+/*
+  Logger.log(gr1);
+  Logger.log(gr2);
+  Logger.log(gr3);
+  Logger.log(gr4);
+*/
+
+  gr1= gr1.substring(0, gr1.length - 2);
+  gr2= gr2.substring(0, gr2.length - 2);
+  gr3= gr3.substring(0, gr3.length - 2);
+  gr4= gr4.substring(0, gr4.length - 2);
+  
+  
+  gr1wa='[1] = {'+gr1+'},'
+  gr2wa='[2] = {'+gr2+'},'  
+  gr3wa='[3] = {'+gr3+'},'
+  gr4wa='[4] = {'+gr4+'},'
+
+  gr1aa='{star} |cFFFFFF00Front Left {star}|r '+gr1
+  gr2aa='{circle} |cFFFF7D0AFront Right {circle}|r '+gr2
+  gr3aa='{diamond} |cFFBC3CBCBack Left {diamond}|r '+gr3
+  gr4aa='{triangle} |cFF00FF00Back Right {triangle}|r '+gr4
+
+  
+/*  
+  Logger.log(gr1);
+*/
+  
+var d = new Date();
+var currentDate = d.toLocaleDateString();
+ var currentTime = d.toLocaleTimeString();
+  
+/*  var newDoc = DocumentApp.create('1RAIDARCHI' +' - ' +currentDate +' - ' +currentTime);
+    var newDoc = DocumentApp.create('ARCHI');
+*/
+  var fileid = "1H8IMslhEhcovmKzxdCSwZNBBa5wzbjQtEIQaidule4s"
+  var doc = DocumentApp.openById(fileid);
+  var body = doc.getActiveSection();
+  body.appendParagraph("");
+  body.appendParagraph(gr1wa);
+  body.appendParagraph(gr2wa);
+  body.appendParagraph(gr3wa);
+  body.appendParagraph(gr4wa);
+  body.appendParagraph("");
+  body.appendParagraph(gr1aa);
+  body.appendParagraph(gr2aa);
+  body.appendParagraph(gr3aa);
+  body.appendParagraph(gr4aa);
+  doc.saveAndClose();
+  Logger.log(doc);
+}
+
+
+
